@@ -356,8 +356,10 @@ export class Region {
         /* Loop playback. */
         this.on('out', () => {
             if (this.loop) {
-                const realTime = this.wavesurfer.getCurrentTime();
-                if (realTime >= this.start && realTime <= this.end) {
+                const realTime = Math.round(this.wavesurfer.getCurrentTime() * 1000) / 1000;
+                const end = Math.round(this.end * 1000) / 1000;
+                const start = Math.round(this.start * 1000) / 1000;
+                if (realTime >= start && realTime <= end) {
                     this.wavesurfer.play(this.start);
                 }
             }
