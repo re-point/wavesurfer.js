@@ -325,9 +325,9 @@ export class Region {
         this.firedOut = false;
 
         const onProcess = (time) => {
-            let start = Math.round(this.start * 10) / 10;
-            let end = Math.round(this.end * 10) / 10;
-            time = Math.round(time * 10) / 10;
+            let start = Math.round(this.start * 1000) / 1000;
+            let end = Math.round(this.end * 1000) / 1000;
+            time = Math.round(time * 1000) / 1000;
 
             if (
                 !this.firedOut &&
