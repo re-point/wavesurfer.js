@@ -325,9 +325,9 @@ export class Region {
         this.firedOut = false;
 
         const onProcess = (time) => {
-            let start = Math.round(this.start * 1000) / 1000;
-            let end = Math.round(this.end * 1000) / 1000;
-            time = Math.round(time * 1000) / 1000;
+            let start = Math.floor(this.start * 100) / 100;
+            let end = Math.floor(this.end * 100) / 100;
+            time = Math.floor(time * 100) / 100;
 
             if (
                 !this.firedOut &&
@@ -356,10 +356,10 @@ export class Region {
         /* Loop playback. */
         this.on('out', () => {
             if (this.loop) {
-                const realTime = Math.round(this.wavesurfer.getCurrentTime() * 1000) / 1000;
-                const end = Math.round(this.end * 1000) / 1000;
-                const start = Math.round(this.start * 1000) / 1000;
-                if (realTime >= start && realTime <= end) {
+                const eps = 0.015;
+                const realTime = Math.round(this.wavesurfer.getCurrentTime() * 100) / 100;
+                const end = Math.round(this.end * 100) / 100;
+                if (Math.abs(realTime - end) <= eps) {
                     this.wavesurfer.play(this.start);
                 }
             }
