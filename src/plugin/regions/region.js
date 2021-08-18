@@ -356,7 +356,10 @@ export class Region {
         /* Loop playback. */
         this.on('out', () => {
             if (this.loop) {
-                const eps = 0.015;
+                let eps = 0.015;
+                if (this.wavesurfer.getPlaybackRate() > 1) {
+                    eps *= 2;
+                }
                 const realTime = Math.round(this.wavesurfer.getCurrentTime() * 100) / 100;
                 const end = Math.round(this.end * 100) / 100;
                 if (Math.abs(realTime - end) <= eps) {
