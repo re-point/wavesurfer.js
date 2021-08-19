@@ -356,7 +356,7 @@ export class Region {
         /* Loop playback. */
         this.on('out', () => {
             if (this.loop) {
-                let eps = 0.02;
+                let eps = (1 / 25);
                 if (this.wavesurfer.getPlaybackRate() > 1) {
                     eps *= 2;
                 }
